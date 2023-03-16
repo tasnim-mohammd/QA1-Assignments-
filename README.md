@@ -48,3 +48,8 @@ Use a switch statement instead of multiple if-else statements to handle differen
    the issue is that the copy, paste, cut, move and changed  fields are declared as public, which means they can be accessed and modified from anywhere in the code, breaking the encapsulation principle. SonarLint recommend to modify the declaration of the public fields to static final constant or non public and provide accessor methods to improve encapsulation and maintainability.By following this recommendation, the code becomes easier to understand, test, and modify, while reducing the risk of errors and bugs, ultimately improving software quality.
    So i declare copy, paste, cut, move and changed as static final Based on constant convention in Java.
 
+### 6.extract the nested try block into seperate method 
+### Issue Type : 
+### Issye Severity : 
+### Issue Description : 
+   The issue is that we have a nested try block in the editor file so i created a new method called readFile() which takes a File object as input and returns the contents of the file as a String so the code bacame more modular and easier to understand.
