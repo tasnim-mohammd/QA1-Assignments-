@@ -21,12 +21,12 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		new Editor();
 	}
 
-	public JEditorPane TP;//Text Panel
-	public JMenuBar menu;//Menu
+
+	public static final JEditorPane TP = new JEditorPane("TP");
+	public static final JMenuBar MENU = new JMenuBar("menu");
 	public static final JMenuItem COPY_ITEM = new JMenuItem("Copy");
 	public static final JMenuItem PASTE_ITEM = new JMenuItem("Paste");
 	public static final JMenuItem CUT_ITEM = new JMenuItem("Cut");
-	public static final JMenuItem MOVE_ITEM = new JMenuItem("Move");
 	private boolean changed = false;
 
 	public boolean isChanged() {
@@ -54,7 +54,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		TP.getDocument().addDocumentListener(this);
 
 		menu = new JMenuBar();
-		setJMenuBar(menu);
+		setJMenuBar(MENU);
 		BuildMenu();
 		//The size of window
 		setSize(500, 500);
@@ -102,13 +102,13 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		menu.add(edit);
 		edit.setMnemonic('E');
 		// cut
-		cut = new JMenuItem("Cut");
+		cut = new JMenuItem(CUT_ITEM);
 		cut.addActionListener(this);
 		cut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
 		cut.setMnemonic('T');
 		edit.add(cut);
 		// copy
-		copy = new JMenuItem("Copy");
+		copy = new JMenuItem(COPY_ITEM);
 		copy.addActionListener(this);
 		copy.setMnemonic('C');
 		copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
@@ -154,10 +154,10 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			case "Select All":
 				handleSelectAllAction();
 				break;
-			case "Copy":
+			case COPY_ITEM:
 				handleCopyAction();
 				break;
-			case "Cut":
+			case CUT_ITEM:
 				handleCutAction();
 				break;
 			case PASTE_ITEM :
