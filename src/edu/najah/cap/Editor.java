@@ -27,7 +27,15 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	public static final JMenuItem PASTE_ITEM = new JMenuItem("Paste");
 	public static final JMenuItem CUT_ITEM = new JMenuItem("Cut");
 	public static final JMenuItem MOVE_ITEM = new JMenuItem("Move");
-	private static final boolean CHANGED = false;
+	private boolean changed = false;
+
+	public boolean isChanged() {
+		return changed;
+	}
+
+	public void setChanged(boolean value) {
+		changed = value;
+	}
 
 
 
