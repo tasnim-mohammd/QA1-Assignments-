@@ -36,14 +36,15 @@ Use a switch statement instead of multiple if-else statements to handle differen
 * Move logging to a separate method to reduce code redundancy and make code easier to maintain.
 * Use early returns or continue statements to exit the method early if certain conditions are met, rather than nesting further logic within an if-statement.
 
-## 5. Make "variables" a static final constant or non public and provide accessors if needed
+### 5. Make "variables" a static final constant or non public and provide accessors if needed
 ### 5.1 make copy a static final constant or non public and provide accessors if needed
 ### 5.2 make paste a static final constant or non public and provide accessors if needed
 ### 5.3 make cut a static final constant or non public and provide accessors if needed
 ### 5.4 make move a static final constant or non public and provide accessors if needed
 ### 5.5 make changed a static final constant or non public and provide accessors if needed
-#### - Issue Type: Code Smell, Issue Severity: Minor.
-### - Issue Description : 
+#### - Issue Type: Code Smell
+#### Issue Severity: Minor.
+#### - Issue Description : 
    the issue is that the copy, paste, cut, move and changed  fields are declared as public, which means they can be accessed and modified from anywhere in the code, breaking the encapsulation principle. SonarLint recommend to modify the declaration of the public fields to static final constant or non public and provide accessor methods to improve encapsulation and maintainability.By following this recommendation, the code becomes easier to understand, test, and modify, while reducing the risk of errors and bugs, ultimately improving software quality.
    So i declare copy, paste, cut, move and changed as static final Based on constant convention in Java.
 
