@@ -42,14 +42,30 @@ Use a switch statement instead of multiple if-else statements to handle differen
 ### 5.3 make cut a static final constant or non public and provide accessors if needed
 ### 5.4 make move a static final constant or non public and provide accessors if needed
 ### 5.5 make changed a static final constant or non public and provide accessors if needed
+### 5.6 make Tp a static final constant or non public and provide accessors if needed
+### 5.7 make menu a static final constant or non public and provide accessors if needed
 #### - Issue Type: Code Smell
 #### - Issue Severity: Minor.
 #### - Issue Description : 
    the issue is that the copy, paste, cut, move and changed  fields are declared as public, which means they can be accessed and modified from anywhere in the code, breaking the encapsulation principle. SonarLint recommend to modify the declaration of the public fields to static final constant or non public and provide accessor methods to improve encapsulation and maintainability.By following this recommendation, the code becomes easier to understand, test, and modify, while reducing the risk of errors and bugs, ultimately improving software quality.
-   So i declare copy, paste, cut, move and changed as static final Based on constant convention in Java.
+   So i declare copy, paste, cut , tp , menu and changed as static final Based on constant convention in Java.
+   and delete move cause no usage for it 
 
 ### 6.extract the nested try block into seperate method 
 ### Issue Type : Code smell
 ### Issye Severity : Major
 ### Issue Description : 
    The issue is that we have a nested try block in the editor file so i created a new method called readFile() which takes a File object as input and returns the contents of the file as a String so the code bacame more modular and easier to understand.
+   and this improve the quality of the code by making it more modular, readable, and maintainable.
+
+### 7. Define constant instead of duplicating 
+### 7.1 Define constant instead of duplicating copy 
+### 7.2 Define constant instead of duplicating paste
+### 7.3 Define constant instead of duplicating cut
+### 7.4 Define constant instead of duplicating tp
+### 7.5 Define constant instead of duplicating menu
+### Issue Type : Code Smell 
+### Issue Severity : Critical 
+### Issue Description : 
+The issue is that we have to use the constant  " PASTE_ITEM", " COPY_ITEM " , " CUT_ITEM " , "MENU" , "TP "  wherever we need to use the  string  in the editor file .
+and this improve the quality of the code by improving readability, consistency, scalability, and maintainability.
