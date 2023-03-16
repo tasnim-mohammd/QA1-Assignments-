@@ -53,9 +53,11 @@ Use a switch statement instead of multiple if-else statements to handle differen
 ### Issye Severity : Major
 ### Issue Description : 
    The issue is that we have a nested try block in the editor file so i created a new method called readFile() which takes a File object as input and returns the contents of the file as a String so the code bacame more modular and easier to understand.
+   and this improve the quality of the code by making it more modular, readable, and maintainable.
 
 ### 7. Define constant instead of duplicating "paste" 3 times 
 ### Issue Type : Code Smell 
 ### Issue Severity : Critical 
 ### Issue Description : 
 T he issue is that we have to use the constant var " PASTE_ITEM" wherever we need to use the "paste" string  in the editor file .
+and this improve the quality of the code by improving readability, consistency, scalability, and maintainability.
