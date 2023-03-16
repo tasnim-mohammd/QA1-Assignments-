@@ -23,7 +23,10 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 
 	public JEditorPane TP;//Text Panel
 	public JMenuBar menu;//Menu
-	public JMenuItem copy, paste, cut, move;
+	public static final JMenuItem COPY_ITEM = new JMenuItem("Copy");
+	public static final JMenuItem PASTE_ITEM = new JMenuItem("Paste");
+	public static final JMenuItem CUT_ITEM = new JMenuItem("Cut");
+	public static final JMenuItem MOVE_ITEM = new JMenuItem("Move");
 	public boolean changed = false;
 	protected File file;
 
