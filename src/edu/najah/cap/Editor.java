@@ -160,7 +160,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			case "Cut":
 				handleCutAction();
 				break;
-			case PASTE_ITEM:
+			case PASTE_ITEM :
 				handlePasteAction();
 				break;
 			case "Find":
