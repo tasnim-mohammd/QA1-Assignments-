@@ -114,7 +114,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
 		edit.add(copy);
 		// paste
-		paste = new JMenuItem("Paste");
+		paste = new JMenuItem(PASTE_ITEM);
 		paste.setMnemonic('P');
 		paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
 		edit.add(paste);
@@ -160,7 +160,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			case "Cut":
 				handleCutAction();
 				break;
-			case "Paste":
+			case PASTE_ITEM:
 				handlePasteAction();
 				break;
 			case "Find":
