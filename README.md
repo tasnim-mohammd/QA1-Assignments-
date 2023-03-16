@@ -36,6 +36,7 @@ Use a switch statement instead of multiple if-else statements to handle differen
 * Move logging to a separate method to reduce code redundancy and make code easier to maintain.
 * Use early returns or continue statements to exit the method early if certain conditions are met, rather than nesting further logic within an if-statement.
 
+
 ### 5. Make "variables" a static final constant or non public and provide accessors if needed
 ### 5.1 make copy a static final constant or non public and provide accessors if needed
 ### 5.2 make paste a static final constant or non public and provide accessors if needed
@@ -75,10 +76,45 @@ and this improve the quality of the code by improving readability, consistency, 
 ### 9. A "NullPointerException" could be thrown: "writer" is nullable here.
 ### Issue Type : Bug
 ### Issue Severity : Major
+### 9.1
+```agsl
+private void handleSaveFileAction() {
+		int ans = 0;
+		if (changeStatus) {
+			ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file", 0, 2);
+		}
+		if (ans != 1) {
+			if (file == null) {
+				saveAs(actions[1]);
+			} else {
+				String text = textPanel.getText();
+				try (PrintWriter writer = new PrintWriter(file)) {
+					if (!file.canWrite()) {
+						throw new EditorSaveException("Cannot write file!");
+					}
+					writer.write(text);
+					changeStatus = false;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+	}
+```
+* Based on this code I noticed that in the handleSaveFileAction() method, the answer variable is not initialized if the changeStatus condition is false, which may result in a NullPointerException when checking its value in the if condition (answer! = 1). To avoid this, you can initialize the ans variable to a default value, such as -1 , before the if (changeStatus) block.
+```agsl
+
+```
+* There is a problem with the getWriter method, which returns null if an exception is thrown during PrintWriter creation. If writer is null, a NullPointerException will be thrown when trying to call the write method on it at the writer line.write(textPanel.getText());.
+To fix this, you can modify the saveAs method to handle the case where the writer is null. One way to do this is to add an if statement to check if the writer is null, and if so, return from the method without writing anything to the file.
+In the modified method, if the writer is not null, it will try to write to the file as before. However, we've added a try-catch-final block to catch any IO exceptions that might occur while writing to the file, and to close the writer regardless of whether the write was successful or not.
+In the else block, we handle the case where the writer is empty by displaying an error message to the user. You can customize this error message to suit your needs.
 ### 10.Rename this method name (BuildMenu) to match regular expression '[a-z][a-zA-Z0-9]*$'.
 ### Issue Type : code smell
 ### Issue Severity : Minor
-11. Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
+### 11. Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
 ### Issue Type : Code Smell 
 ### Issue Severity : Critical 
+
+### 12.
 
