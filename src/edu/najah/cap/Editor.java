@@ -27,7 +27,10 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	public static final JMenuItem PASTE_ITEM = new JMenuItem("Paste");
 	public static final JMenuItem CUT_ITEM = new JMenuItem("Cut");
 	public static final JMenuItem MOVE_ITEM = new JMenuItem("Move");
-	public static final boolean CHANGED = false;
+	private static final boolean CHANGED = false;
+
+
+
 	protected File file;
 
 	private String[] actions = {"Open","Save","New","Edit","Quit", "Save as..."};
@@ -264,6 +267,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			file = dialog.getSelectedFile();
 
 			StringBuilder rs = readFile(file);
+
 			TP.setText(rs.toString());
 			changed = false;
 			setTitle("Editor - " + file.getName());
@@ -273,7 +277,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			JOptionPane.showMessageDialog(null, e, "Error", 0);
 		}
 	}
-	private StringBuilder readFile(File file) throws IOException {
+	private String readFile(File file) throws IOException {
 		StringBuilder rs = new StringBuilder();
 		try (FileReader fr = new FileReader(file);
 			 BufferedReader reader = new BufferedReader(fr);) {
@@ -282,7 +286,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 				rs.append(line + "\n");
 			}
 		}
-		return rs;
+		return rs.toString();
 	}
 
 
