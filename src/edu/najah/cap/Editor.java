@@ -1,37 +1,21 @@
 package edu.najah.cap;
 
-import edu.najah.cap.ex.EditorException;
-import edu.najah.cap.ex.EditorSaveAsException;
 import edu.najah.cap.ex.EditorSaveException;
+import java.util.logging.Logger;
 
-import java.awt.BorderLayout;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JEditorPane;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.KeyStroke;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import java.io.*;
 
 @SuppressWarnings("serial")
 public class Editor extends JFrame implements ActionListener, DocumentListener {
+
+	private static final Logger logger = Logger.getLogger(Editor.class.getName());
 
 	public static  void main(String[] args) {
 		new Editor();
@@ -121,15 +105,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
 		edit.add(paste);
 		paste.addActionListener(this);
-		//move
-		/*
-		move = new JMenuItem("Move");
-		move.setMnemonic('M');
-		move.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
-		edit.add(move);
-		move.addActionListener(this);
-		*/
-		// find
+
 		JMenuItem find = new JMenuItem("Find");
 		find.setMnemonic('F');
 		find.addActionListener(this);
@@ -142,87 +118,127 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		sall.addActionListener(this);
 		edit.add(sall);
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
-		if (action.equals(actions[4])) {
-			System.exit(0);
-		} else if (action.equals(actions[0])) {
-			loadFile();
-		} else if (action.equals(actions[1])) {
-			//Save file
-			int ans = 0;
-			if (changed) {
-				// 0 means yes and no option, 2 Used for warning messages.
-				ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file", 0, 2);
-			}
-			//1 value from class method if NO is chosen.
-			if (ans != 1) {
-				if (file == null) {
-					saveAs(actions[1]);
-				} else {
-					String text = TP.getText();
-					System.out.println(text);
-					try (PrintWriter writer = new PrintWriter(file);){
-						if (!file.canWrite())
-							throw new EditorSaveException("Cannot write file!");
-						writer.write(text);
-						changed = false;
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-				}
-			}
-		} else if (action.equals(actions[2])) {
-			//New file
-			if (changed) {
-				//Save file
-				if (changed) {
-					// 0 means yes and no option, 2 Used for warning messages.
-					int ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file",
-							0, 2);
-					//1 value from class method if NO is chosen.
-					if (ans == 1)
-						return;
-				} else {
-					return;
-				}
-				if (file == null) {
-					saveAs(actions[1]);
-					return;
-				}
+		switch (action) {
+			case "Exit":
+				handleExitAction();
+				break;
+			case "Load":
+				handleLoadFileAction();
+				break;
+			case "Save":
+				handleSaveFileAction();
+				break;
+			case "New":
+				handleNewFileAction();
+				break;
+			case "Save As":
+				handleSaveAsAction();
+				break;
+			case "Select All":
+				handleSelectAllAction();
+				break;
+			case "Copy":
+				handleCopyAction();
+				break;
+			case "Cut":
+				handleCutAction();
+				break;
+			case "Paste":
+				handlePasteAction();
+				break;
+			case "Find":
+				handleFindAction();
+				break;
+		}
+	}
+
+	private void handleExitAction() {
+		System.exit(0);
+	}
+
+	private void handleLoadFileAction() {
+		loadFile();
+	}
+
+	private void handleSaveFileAction() {
+		int ans = 0;
+		if (changed) {
+			ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file", 0, 2);
+		}
+		if (ans != 1) {
+			if (file == null) {
+				saveAs(actions[1]);
+			} else {
 				String text = TP.getText();
-				System.out.println(text);
-				try (PrintWriter writer = new PrintWriter(file);){
-					if (!file.canWrite())
-						throw new Exception("Cannot write file!");
+				try (PrintWriter writer = new PrintWriter(file)) {
+					if (!file.canWrite()) {
+						throw new EditorSaveException("Cannot write file!");
+					}
 					writer.write(text);
 					changed = false;
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 			}
-			file = null;
-			TP.setText("");
-			changed = false;
-			setTitle("Editor");
-		} else if (action.equals(actions[5])) {
-			saveAs(actions[5]);
-		} else if (action.equals("Select All")) {
-			TP.selectAll();
-		} else if (action.equals("Copy")) {
-			TP.copy();
-		} else if (action.equals("Cut")) {
-			TP.cut();
-		} else if (action.equals("Paste")) {
-			TP.paste();
-		} else if (action.equals("Find")) {
-			FindDialog find = new FindDialog(this, true);
-			find.showDialog();
 		}
 	}
 
+	private void handleNewFileAction() {
+		if (changed) {
+			handleSaveFileAction();
+		}
+		file = null;
+		TP.setText("");
+		changed = false;
+		setTitle("Editor");
+	}
+
+	private void handleSaveAsAction() {
+		saveAs(actions[5]);
+	}
+
+	private void handleSelectAllAction() {
+		TP.selectAll();
+	}
+
+	private void handleCopyAction() {
+		TP.copy();
+	}
+
+	private void handleCutAction() {
+		TP.cut();
+	}
+
+	private void handlePasteAction() {
+		TP.paste();
+	}
+
+	private void handleFindAction() {
+		FindDialog find = new FindDialog(this, true);
+		find.showDialog();
+	}
+
+
+
+	private void saveFile() {
+		if (file == null) {
+			saveAs(actions[1]);
+			return;
+		}
+		String text = TP.getText();
+		logger.info(text);
+		try (PrintWriter writer = new PrintWriter(file);) {
+			if (!file.canWrite())
+				throw new EditorSaveException("Cannot write file!");
+			writer.write(text);
+			changed = false;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	private void loadFile() {
 		JFileChooser dialog = new JFileChooser(System.getProperty("user.home"));
@@ -230,57 +246,37 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		try {
 			int result = dialog.showOpenDialog(this);
 
-			if (result == 1)//1 value if cancel is chosen.
+			if (result != 0) {
 				return;
-			if (result == 0) {// value if approve (yes, ok) is chosen.
-				if (changed){
-					//Save file
-					if (changed) {
-						int ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file",
-								0, 2);//0 means yes and no question and 2 mean warning dialog
-						if (ans == 1)// no option
-							return;
-					} else {
-						System.out.println("No change");
-						return;
-					}
-					if (file == null) {
-						saveAs(actions[1]);
-						return;
-					}
-					String text = TP.getText();
-					System.out.println(text);
-					try {
-						PrintWriter writer = new PrintWriter(file);
-						if (!file.canWrite())
-							throw new Exception("Cannot write file!");
-						writer.write(text);
-						changed = false;
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				file = dialog.getSelectedFile();
-				//Read file
-				StringBuilder rs = new StringBuilder();
-				try (	FileReader fr = new FileReader(file);
-						 BufferedReader reader = new BufferedReader(fr);) {
-					String line;
-					while ((line = reader.readLine()) != null) {
-						rs.append(line + "\n");
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Cannot read file !", "Error !", 0);//0 means show Error Dialog
-				}
-
-				TP.setText(rs.toString());
-				changed = false;
-				setTitle("Editor - " + file.getName());
 			}
+
+			if (changed) {
+				int ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file", 0, 2);
+				if (ans == 1) {
+					return;
+				}
+				saveFile();
+			}
+
+			file = dialog.getSelectedFile();
+
+			StringBuilder rs = new StringBuilder();
+			try (FileReader fr = new FileReader(file); BufferedReader reader = new BufferedReader(fr);) {
+				String line;
+				while ((line = reader.readLine()) != null) {
+					rs.append(line + "\n");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Cannot read file !", "Error !", 0);
+			}
+
+			TP.setText(rs.toString());
+			changed = false;
+			setTitle("Editor - " + file.getName());
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			//0 means show Error Dialog
 			JOptionPane.showMessageDialog(null, e, "Error", 0);
 		}
 	}
@@ -305,22 +301,6 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			return new PrintWriter(file);
 		} catch (Exception e){
 			return null;
-		}
-	}
-
-	private void saveAsText(String dialogTitle) throws EditorSaveAsException {
-		JFileChooser dialog = new JFileChooser(System.getProperty("user.home"));
-		dialog.setDialogTitle(dialogTitle);
-		int result = dialog.showSaveDialog(this);
-		if (result != 0)//0 value if approve (yes, ok) is chosen.
-			return;
-		file = dialog.getSelectedFile();
-		try (PrintWriter writer = new PrintWriter(file);){
-			writer.write(TP.getText());
-			changed = false;
-			setTitle("Save as Text Editor - " + file.getName());
-		} catch (FileNotFoundException e) {
-			throw new EditorSaveAsException(e.getMessage());
 		}
 	}
 
