@@ -80,6 +80,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		quit.addActionListener(this);
 		quit.setMnemonic('Q');
 		quit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));
+
 	}
 
 	private void buildEditMenu() {

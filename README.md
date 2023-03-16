@@ -1,7 +1,7 @@
 # Static analyzer
 
 ### 1. (127, 3) This block of commented-out lines of code should be removed.
-   This was my first sonarlent job malfunction,
+   This was my first sonarlint job malfunction,
 
 #### - Issue Type: Code Smell, Issue Severity: MAJOR.
    This was the description of the problem, after I read it and examined the code, it turned out that there were lines with unnecessary comments that should be deleted, so I got rid of them.
@@ -16,7 +16,7 @@ Unused code should be deleted and can be retrieved from source control history i
    The saveAsText method was defined but not called in the program, which means it had no effect on the behavior of the program.I decided to remove it to make the code more clear and concise.
    I deleted the commented lines block from the code and the saveAsText method because it is not used in the program, and removing them does not affect the functionality of the program.
 
-Description of the error on Sonarlent: "private methods that are never executed are dead code: unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced .
+Description of the error on Sonarlint: "private methods that are never executed are dead code: unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced .
 Note that this rule does not take reflection into account, which means that issues will be raised on private methods that are only accessed using the reflection API."
 
 ### 3. (234, 5) Replace this use of System.out or System.err by a logger.
