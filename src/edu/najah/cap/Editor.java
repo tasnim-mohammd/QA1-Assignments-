@@ -39,14 +39,14 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 
 		menu = new JMenuBar();
 		setJMenuBar(menu);
-		BuildMenu();
+		buildMenu();
 		//The size of window
 		setSize(500, 500);
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
-	private void BuildMenu() {
+	private void buildMenu() {
 		buildFileMenu();
 		buildEditMenu();
 	}
@@ -151,6 +151,9 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			case "Find":
 				handleFindAction();
 				break;
+			default:
+                                logger.info("The entered action is not in the list");
+		
 		}
 	}
 
@@ -292,7 +295,9 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			return;
 		file = dialog.getSelectedFile();
 		PrintWriter writer = getWriter(file);
-		writer.write(textPanel.getText());
+		if (writer!=null){
+                writer.write(textPanel.getText());
+                }
 		changeStatus = false;
 		setTitle("Editor - " + file.getName());
 	}
