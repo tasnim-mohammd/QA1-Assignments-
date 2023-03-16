@@ -49,7 +49,7 @@ Use a switch statement instead of multiple if-else statements to handle differen
    So i declare copy, paste, cut, move and changed as static final Based on constant convention in Java.
 
 ### 6.extract the nested try block into seperate method 
-### Issue Type : 
-### Issye Severity : 
+### Issue Type : Code smell
+### Issye Severity : Major
 ### Issue Description : 
    The issue is that we have a nested try block in the editor file so i created a new method called readFile() which takes a File object as input and returns the contents of the file as a String so the code bacame more modular and easier to understand.
