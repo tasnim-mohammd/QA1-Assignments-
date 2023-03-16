@@ -69,3 +69,16 @@ Use a switch statement instead of multiple if-else statements to handle differen
 ### Issue Description : 
 The issue is that we have to use the constant  " PASTE_ITEM", " COPY_ITEM " , " CUT_ITEM " , "MENU" , "TP "  wherever we need to use the  string  in the editor file .
 and this improve the quality of the code by improving readability, consistency, scalability, and maintainability.
+### 8. Add a default case to this switch.
+### Issue Type : Code Smell 
+### Issue Severity : Critical 
+### 9. A "NullPointerException" could be thrown: "writer" is nullable here.
+### Issue Type : Bug
+### Issue Severity : Major
+### 10.Rename this method name (BuildMenu) to match regular expression '[a-z][a-zA-Z0-9]*$'.
+### Issue Type : code smell
+### Issue Severity : Minor
+11. Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
+### Issue Type : Code Smell 
+### Issue Severity : Critical 
+
