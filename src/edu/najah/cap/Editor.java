@@ -27,7 +27,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	public static final JMenuItem PASTE_ITEM = new JMenuItem("Paste");
 	public static final JMenuItem CUT_ITEM = new JMenuItem("Cut");
 	public static final JMenuItem MOVE_ITEM = new JMenuItem("Move");
-	public boolean changed = false;
+	public static final boolean CHANGED = false;
 	protected File file;
 
 	private String[] actions = {"Open","Save","New","Edit","Quit", "Save as..."};
@@ -263,17 +263,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 
 			file = dialog.getSelectedFile();
 
-			StringBuilder rs = new StringBuilder();
-			try (FileReader fr = new FileReader(file); BufferedReader reader = new BufferedReader(fr);) {
-				String line;
-				while ((line = reader.readLine()) != null) {
-					rs.append(line + "\n");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Cannot read file !", "Error !", 0);
-			}
-
+			StringBuilder rs = readFile(file);
 			TP.setText(rs.toString());
 			changed = false;
 			setTitle("Editor - " + file.getName());
@@ -282,6 +272,17 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e, "Error", 0);
 		}
+	}
+	private StringBuilder readFile(File file) throws IOException {
+		StringBuilder rs = new StringBuilder();
+		try (FileReader fr = new FileReader(file);
+			 BufferedReader reader = new BufferedReader(fr);) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				rs.append(line + "\n");
+			}
+		}
+		return rs;
 	}
 
 
