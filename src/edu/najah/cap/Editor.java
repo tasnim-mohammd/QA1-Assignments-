@@ -17,8 +17,8 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 
 	private static final Logger logger = Logger.getLogger(Editor.class.getName());
 
-	public JEditorPane textPanel;//Text Panel
-	public JMenuBar menu;//Menu
+	public JEditorPane textPanel;
+	public JMenuBar menu;
 	private boolean changeStatus = false;
 
 
@@ -30,17 +30,14 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	protected JMenu jmfile;
 
 	public Editor() {
-		//Editor the name of our application
 		super("Editor");
 		textPanel = new JEditorPane();
-		// center means middle of container.
 		add(new JScrollPane(textPanel), "Center");
 		textPanel.getDocument().addDocumentListener(this);
 
 		menu = new JMenuBar();
 		setJMenuBar(menu);
 		buildMenu();
-		//The size of window
 		setSize(500, 500);
 		setVisible(true);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -87,19 +84,19 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		JMenu edit = new JMenu(actions[3]);
 		menu.add(edit);
 		edit.setMnemonic('E');
-		// cut
+
 		JMenuItem cut = new JMenuItem("Cut");
 		cut.addActionListener(this);
 		cut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
 		cut.setMnemonic('T');
 		edit.add(cut);
-		// copy
+
 		JMenuItem copy = new JMenuItem("Copy");
 		copy.addActionListener(this);
 		copy.setMnemonic('C');
 		copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
 		edit.add(copy);
-		// paste
+
 		JMenuItem paste= new JMenuItem("Paste");
 		paste.setMnemonic('P');
 		paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
@@ -111,7 +108,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		find.addActionListener(this);
 		edit.add(find);
 		find.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK));
-		// select all
+
 		JMenuItem sall = new JMenuItem("Select All");
 		sall.setMnemonic('A');
 		sall.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
