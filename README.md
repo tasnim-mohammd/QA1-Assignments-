@@ -153,3 +153,20 @@ i solve this issue by using the try-with-resources statement  then it is automat
 #### - Issue Severity : Minor
 #### - Issue Description : 
 Declaring multiple variables on one line is difficult to read.so i  Declare "close" on seperate line .
+
+
+
+## Issue in the EditorException File : 
+
+
+
+## Issue in the EditorFileException File : 
+
+
+
+
+## False Positive : 
+
+
+
+## False Negative :
