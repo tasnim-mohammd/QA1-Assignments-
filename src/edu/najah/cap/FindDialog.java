@@ -63,24 +63,25 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener {
 		caseSensitive.addKeyListener(this);
 	}
 
-	private void find(String pattern) {
-		if (!finishedFinding) {
-			if (matcher.find()) {
-				int selectionStart = matcher.start();
-				int selectionEnd = matcher.end();
-				editor.textPanel.moveCaretPosition(matcher.start());
-				editor.textPanel.select(selectionStart, selectionEnd);
-			} else {
-				finishedFinding = true;
-				JOptionPane.showMessageDialog(this, "You have reached the end of the file", "End of file",
-						JOptionPane.INFORMATION_MESSAGE);
-			}
-		} else {
-			matcher = Pattern.compile(pattern).matcher(editor.textPanel.getText());
-			finishedFinding = false;
-			find(pattern);
-		}
-	}
+	    private void find(String pattern) {
+        if (pattern.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Search string cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!matcher.find()) {
+            if (!finishedFinding) {
+                JOptionPane.showMessageDialog(this, "No more matches found", "Info", JOptionPane.INFORMATION_MESSAGE);
+                finishedFinding = true;
+            }
+            return;
+        }
+
+        int start = matcher.start();
+        int end = matcher.end();
+        editor.textPanel.select(start, end);
+        editor.textPanel.requestFocusInWindow();
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
