@@ -18,7 +18,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	private static final Logger logger = Logger.getLogger(Editor.class.getName());
 
 	protected JEditorPane textPanel;
-	public  JMenuBar menu;
+	private JMenuBar menu;
 	private boolean changeStatus = false;
 
 
@@ -37,7 +37,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		add(new JScrollPane(textPanel), "Center");
 		textPanel.getDocument().addDocumentListener(this);
 
-		JMenuBar	menu = new JMenuBar();
+			menu = new JMenuBar();
 		setJMenuBar(menu);
 		buildMenu();
 		//The size of window
