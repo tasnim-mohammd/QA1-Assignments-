@@ -71,11 +71,11 @@ Use a switch statement instead of multiple if-else statements to handle differen
 The issue is that we have to use the constant  " PASTE_ITEM", " COPY_ITEM " , " CUT_ITEM " , "MENU" , "TP "  wherever we need to use the  string  in the editor file .
 and this improves the quality of the code by improving readability, consistency, scalability, and maintainability.
 ### 8. Add a default case to this switch.
-### Issue Type : Code Smell 
-### Issue Severity : Critical 
+#### Issue Type : Code Smell 
+#### Issue Severity : Critical 
 ### 9. A "NullPointerException" could be thrown: "writer" is nullable here.
-### Issue Type : Bug
-### Issue Severity : Major
+#### Issue Type : Bug
+#### Issue Severity : Major
 ### 9.1
 ```agsl
 private void handleSaveFileAction() {
@@ -124,11 +124,11 @@ To fix this, you can modify the saveAs method to handle the case where the write
 In the modified method, if the writer is not null, it will try to write to the file as before. However, we've added a try-catch-final block to catch any IO exceptions that might occur while writing to the file, and to close the writer regardless of whether to write was successful or not.
 In the else block, we handle the case where the writer is empty by displaying an error message to the user. You can customize this error message to suit your needs.
 ### 10.Rename this method name (BuildMenu) to match regular expression " [a-z][a-zA-Z0-9]*$ ".
-### Issue Type : code smell
-### Issue Severity : Minor
+#### Issue Type : code smell
+#### Issue Severity : Minor
 ### 11. Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
-### Issue Type : Code Smell 
-### Issue Severity : Critical 
+#### Issue Type : Code Smell 
+#### Issue Severity : Critical 
 
 ### 12. 
 ```agsl
@@ -201,15 +201,15 @@ This was the set of warnings shown in the file editor,
 which worked on fixing it.
 
 ### 14.1 This blocked of commented-out lines of code should be remoed (closeDialog();).
-### Issue Type : Code Smell 
-### Issue Severity : Major
+#### Issue Type : Code Smell 
+#### Issue Severity : Major
 ### 14.2 This blocked of commented-out lines of code should be remoed (System.out.println(e.getKeyCode());).
-### Issue Type : Code Smell 
-### Issue Severity : Major
+#### Issue Type : Code Smell 
+#### Issue Severity : Major
 
 ### 15.1 Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation(keyTyped).
-### Issue Type : Code Smell 
-### Issue Severity : Critical
+#### Issue Type : Code Smell 
+#### Issue Severity : Critical
 ### 15.2 Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation(keyReleased).
-### Issue Type : Code Smell 
-### Issue Severity : Critical
+#### Issue Type : Code Smell 
+#### Issue Severity : Critical
