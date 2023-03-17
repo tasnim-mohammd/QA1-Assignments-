@@ -52,6 +52,7 @@ Use a switch statement instead of multiple if-else statements to handle differen
 During my attempt to solve the error and make it static final constant or non public as the sonar mintioned Other errors were occurring depending on it .. so the optimal one was : 
 To avoid this error I did the following
 Once added JMenuItem all the variables declaration in the top of the file  became unnecessary and no usages for them so I deleted "copy,paste,cut" 
+
 ![image](https://user-images.githubusercontent.com/114527203/225830629-7e5b6999-83ba-4130-8392-2af1b8c45525.png)
 
 for "move" it was already no usages for it so i deleted it also
@@ -64,6 +65,7 @@ finally for "menu" it declared as private
 ### Issue Description : 
    The issue is that we have a nested try block in the editor file so i created a new method called readFile() "as the follwing photo"  which takes a File object as input and returns the contents of the file as a String so the code bacame more modular and easier to understand.
    and this improve the quality of the code by making it more modular, readable, and maintainable.
+   
 ![image](https://user-images.githubusercontent.com/114527203/225834110-2c7fa1ef-f8c4-41b4-8993-6437644b7689.png)
 
 
@@ -124,4 +126,20 @@ The CTRL_MASK constants was deprecated in Java 9 and this reduced maintainabilit
 #### - Issue Severity : Minor
 #### - Issue Description : 
 The SHIFT_MASK constants was deprecated in Java 9 and this reduced maintainability. so i found that it replaced with the InputEvent.SHIFT_DOWN_MASK constants
+
 ![image](https://user-images.githubusercontent.com/114527203/225839870-6938c519-bbaf-4ec8-914e-623d5ccff5f3.png)
+
+### 11.Use try-with-resources or close this "FileWriter" in a "finally" clause. 
+#### - Issue Type : Bug
+#### - Issue Severity : Blocker
+#### - Issue Description : 
+Leaving file open for an extended period it can lead to various issues like Resource leaks, Performance degradation , Data corruption etc or unexpected behavior that can be difficult to diagnose and fix.
+i solve this issue by using the try-with-resources statement  then it is automatically closed when the try block is exited so the try-with-resources statement is  simplifies the code and eliminates the need for the finally block as following : 
+
+![image](https://user-images.githubusercontent.com/114527203/225845072-eab93c5e-1094-4431-a495-058aa2eb181a.png)
+
+
+ cause of try-with-resources statement it is automatically closed  no needed for writer.close() so i deleted it to became as following : 
+ 
+![image](https://user-images.githubusercontent.com/114527203/225845358-d6e64401-e5fb-40ad-a894-5d528417a32c.png)
+
