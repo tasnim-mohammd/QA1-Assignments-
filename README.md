@@ -51,8 +51,9 @@ Use a switch statement instead of multiple if-else statements to handle differen
    the issue is that the copy, paste, cut, move and changed  fields are declared as public, which means they can be accessed and modified from anywhere in the code, breaking the encapsulation principle. SonarLint recommend to modify the declaration of the public fields to static final constant or non public and provide accessor methods to improve encapsulation and maintainability.
 During my attempt to solve the error and make it static final constant or non public as the sonar mintioned Other errors were occurring depending on it .. so the optimal one was : 
 To avoid this error I did the following
-![image](https://user-images.githubusercontent.com/114527203/225830629-7e5b6999-83ba-4130-8392-2af1b8c45525.png)
 Once added JMenuItem all the variables declaration in the top of the file  became unnecessary and no usages for them so I deleted "copy,paste,cut" 
+![image](https://user-images.githubusercontent.com/114527203/225830629-7e5b6999-83ba-4130-8392-2af1b8c45525.png)
+
 for "move" it was already no usages for it so i deleted it also
 for TP rename it to textPanel and then declared as protected because it used in the subclass
 for changed rename it to changeStatus then declared as private 
