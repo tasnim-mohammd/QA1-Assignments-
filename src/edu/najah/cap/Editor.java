@@ -172,17 +172,17 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 				saveAs(actions[1]);
 			} else {
 				String text =textPanel.getText();
-				try {
-					FileWriter writer = new FileWriter(file);
+				try (FileWriter writer = new FileWriter(file)) {
 					if (!file.canWrite()) {
 						throw new EditorSaveException("Cannot write file!");
 					}
 					writer.write(text);
-					writer.close();
 					changeStatus = false;
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
+
+
 			}
 		}
 	}
