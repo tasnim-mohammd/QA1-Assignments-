@@ -1,7 +1,5 @@
 # Static analyzer
 
-## Issyues in the Editor file : 
-
 ### 1. (127, 3) This block of commented-out lines of code should be removed.
    This was my first sonarlint job malfunction,
 
@@ -50,34 +48,35 @@ Use a switch statement instead of multiple if-else statements to handle differen
 #### - Issue Type: Code Smell
 #### - Issue Severity: Minor.
 #### - Issue Description : 
-   the issue is that the copy, paste, cut, move and changed  fields are declared as public, which means they can be accessed and modified from anywhere in the code, breaking the encapsulation principle. SonarLint recommend to modify the declaration of the public fields to static final constant or non public and provide accessor methods to improve encapsulation and maintainability.
-During my attempt to solve the error and make it static final constant or non public as the sonar mintioned Other errors were occurring depending on it .. so the optimal one was : 
-To avoid this error I did the following
-Once added JMenuItem all the variables declaration in the top of the file  became unnecessary and no usages for them so I deleted "copy,paste,cut" 
+   the issue is that the copy, paste, cut, move and changed  fields are declared as public, which means they can be accessed and modified from anywhere in the code, breaking the encapsulation principle. SonarLint recommend to modify the declaration of the public fields to static final constant or non public and provide accessor methods to improve encapsulation and maintainability.By following this recommendation, the code becomes easier to understand, test, and modify, while reducing the risk of errors and bugs, ultimately improving software quality.
+   So i declare copy, paste, cut , tp , menu and changed as static final Based on constant convention in Java.
+   and delete move cause no usage for it 
 
-![image](https://user-images.githubusercontent.com/114527203/225830629-7e5b6999-83ba-4130-8392-2af1b8c45525.png)
-
-for "move" it was already no usages for it so i deleted it also
-for TP rename it to textPanel and then declared as protected because it used in the subclass
-for changed rename it to changeStatus then declared as private 
-finally for "menu" it declared as private 
 ### 6.extract the nested try block into seperate method 
 ### Issue Type : Code smell
 ### Issye Severity : Major
 ### Issue Description : 
-   The issue is that we have a nested try block in the editor file so i created a new method called readFile() "as the follwing photo"  which takes a File object as input and returns the contents of the file as a String so the code bacame more modular and easier to understand.
+   The issue is that we have a nested try block in the editor file so i created a new method called readFile() which takes a File object as input and returns the contents of the file as a String so the code bacame more modular and easier to understand.
    and this improve the quality of the code by making it more modular, readable, and maintainable.
-   
-![image](https://user-images.githubusercontent.com/114527203/225834110-2c7fa1ef-f8c4-41b4-8993-6437644b7689.png)
 
-
-### 7. Add a default case to this switch.
-#### Issue Type : Code Smell 
-#### Issue Severity : Critical 
-### 8. A "NullPointerException" could be thrown: "writer" is nullable here.
-#### Issue Type : Bug
-#### Issue Severity : Major
-### 8.1
+### 7. Define constant instead of duplicating 
+### 7.1 Define constant instead of duplicating copy 
+### 7.2 Define constant instead of duplicating paste
+### 7.3 Define constant instead of duplicating cut
+### 7.4 Define constant instead of duplicating tp
+### 7.5 Define constant instead of duplicating menu
+### Issue Type : Code Smell 
+### Issue Severity : Critical 
+### Issue Description : 
+The issue is that we have to use the constant  " PASTE_ITEM", " COPY_ITEM " , " CUT_ITEM " , "MENU" , "TP "  wherever we need to use the  string  in the editor file .
+and this improve the quality of the code by improving readability, consistency, scalability, and maintainability.
+### 8. Add a default case to this switch.
+### Issue Type : Code Smell 
+### Issue Severity : Critical 
+### 9. A "NullPointerException" could be thrown: "writer" is nullable here.
+### Issue Type : Bug
+### Issue Severity : Major
+### 9.1
 ```agsl
 private void handleSaveFileAction() {
 		int ans = 0;
@@ -104,69 +103,42 @@ private void handleSaveFileAction() {
 ```
 * Based on this code I noticed that in the handleSaveFileAction() method, the answer variable is not initialized if the changeStatus condition is false, which may result in a NullPointerException when checking its value in the if condition (answer! = 1). To avoid this, you can initialize the ans variable to a default value, such as -1 , before the if (changeStatus) block.
 ```agsl
-
+private void saveAs(String dialogTitle) {
+        dialogTitle = dialogTitle.toUpperCase();
+        JFileChooser dialog = new JFileChooser(System.getProperty("user.home"));
+        dialog.setDialogTitle(dialogTitle);
+        int result = dialog.showSaveDialog(this);
+        if (result != 0)//0 value if approve (yes, ok) is chosen.
+            return;
+        file = dialog.getSelectedFile();
+        PrintWriter writer = getWriter(file);
+        if (writer!=null){
+        writer.write(textPanel.getText());
+        }
+        changeStatus = false;
+        setTitle("Editor - " + file.getName());
+    }
 ```
 * There is a problem with the getWriter method, which returns null if an exception is thrown during PrintWriter creation. If writer is null, a NullPointerException will be thrown when trying to call the write method on it at the writer line.write(textPanel.getText());.
 To fix this, you can modify the saveAs method to handle the case where the writer is null. One way to do this is to add an if statement to check if the writer is null, and if so, return from the method without writing anything to the file.
 In the modified method, if the writer is not null, it will try to write to the file as before. However, we've added a try-catch-final block to catch any IO exceptions that might occur while writing to the file, and to close the writer regardless of whether the write was successful or not.
 In the else block, we handle the case where the writer is empty by displaying an error message to the user. You can customize this error message to suit your needs.
-### 9.Rename this method name (BuildMenu) to match regular expression '[a-z][a-zA-Z0-9]*$'.
-#### Issue Type : code smell
-#### Issue Severity : Minor
+### 10.Rename this method name (BuildMenu) to match regular expression '[a-z][a-zA-Z0-9]*$'.
+### Issue Type : code smell
+### Issue Severity : Minor
 ### 11. Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
-#### Issue Type : Code Smell 
-#### Issue Severity : Critical 
+### Issue Type : Code Smell 
+### Issue Severity : Critical 
 
-### 10. Remove deprecated constant :
-### 10.1 Remove this use for "CTRL_MASK"; it is deprecated
-#### - Issue Type : code smell
-#### - Issue Severity : Minor
-#### - Issue Description : 
-The CTRL_MASK constants was deprecated in Java 9 and this reduced maintainability. so i found that it replaced with the InputEvent.CTRL_DOWN_MASK constants
-### 10.2 Remove this use for "SHIFT_MASK"; it is deprecated
-#### - Issue Type : code smell
-#### - Issue Severity : Minor
-#### - Issue Description : 
-The SHIFT_MASK constants was deprecated in Java 9 and this reduced maintainability. so i found that it replaced with the InputEvent.SHIFT_DOWN_MASK constants
+### 12. 
+```agsl
+super("Editor"); 
+```
+to 
+```agsl
+setTitle("Simple Editor");
+```
+* I changed super("Editor"); to setTitle("Simple Editor"); because super("Editor"); sets the title of the frame to "Editor", but in the context of this program, it would be more appropriate to set the title to "Simple Editor" to better reflect the purpose of the program.
 
-![image](https://user-images.githubusercontent.com/114527203/225839870-6938c519-bbaf-4ec8-914e-623d5ccff5f3.png)
+* In Swing, JFrame is a subclass of Frame and Frame has a setTitle method that sets the title of the frame. So, instead of calling the constructor of JFrame with a string argument to set the title, I used the setTitle method to set the title of the frame. This is a more direct and explicit way of setting the title of the frame, and it also makes it clear what the title of the frame will be.
 
-### 11.Use try-with-resources or close this "FileWriter" in a "finally" clause. 
-#### - Issue Type : Bug
-#### - Issue Severity : Blocker
-#### - Issue Description : 
-Leaving file open for an extended period it can lead to various issues like Resource leaks, Performance degradation , Data corruption etc or unexpected behavior that can be difficult to diagnose and fix.
-i solve this issue by using the try-with-resources statement  then it is automatically closed when the try block is exited so the try-with-resources statement is  simplifies the code and eliminates the need for the finally block as following : 
-
-![image](https://user-images.githubusercontent.com/114527203/225845072-eab93c5e-1094-4431-a495-058aa2eb181a.png)
-
-
- cause of try-with-resources statement it is automatically closed  no needed for writer.close() so i deleted it to became as following : 
- 
-![image](https://user-images.githubusercontent.com/114527203/225845358-d6e64401-e5fb-40ad-a894-5d528417a32c.png)
-
-
-## Issues in the FindDialog File : 
-
-### 12. Declare "close" on seperate line 
-#### - Issue Type : Code Smell
-#### - Issue Severity : Minor
-#### - Issue Description : 
-Declaring multiple variables on one line is difficult to read.so i  Declare "close" on seperate line .
-
-
-
-## Issue in the EditorException File : 
-
-
-
-## Issue in the EditorFileException File : 
-
-
-
-
-## False Positive : 
-
-
-
-## False Negative :

@@ -30,17 +30,17 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	protected JMenu jmfile;
 
 	public Editor() {
-		//Editor the name of our application
-		super("Editor");
-		 textPanel = new JEditorPane();
-		// center means middle of container.
+
+		setTitle("Simple Editor");
+		textPanel = new JEditorPane();
+
 		add(new JScrollPane(textPanel), "Center");
 		textPanel.getDocument().addDocumentListener(this);
 
-			menu = new JMenuBar();
+		menu = new JMenuBar();
 		setJMenuBar(menu);
 		buildMenu();
-		//The size of window
+
 		setSize(500, 500);
 		setVisible(true);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -149,7 +149,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 				handleFindAction();
 				break;
 			default:
-                                logger.info("The entered action is not in the list");
+            logger.info("The entered action is not in the list");
 		
 		}
 	}
