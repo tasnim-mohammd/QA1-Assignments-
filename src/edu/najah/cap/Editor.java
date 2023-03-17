@@ -52,7 +52,6 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 
 	private void buildFileMenu() {
       JMenu jFileMenu;
-
 		jFileMenu = new JMenu("File");
 		jFileMenu.setMnemonic('F');
 		menu.add(jFileMenu);
@@ -102,7 +101,6 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
 		edit.add(paste);
 		paste.addActionListener(this);
-
 		JMenuItem find = new JMenuItem("Find");
 		find.setMnemonic('F');
 		find.addActionListener(this);
@@ -159,8 +157,6 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
-
-
 			}
 		}
 	}

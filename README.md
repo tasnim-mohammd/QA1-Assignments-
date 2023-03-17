@@ -48,12 +48,12 @@ Use a switch statement instead of multiple if-else statements to handle differen
 #### - Issue Type: Code Smell
 #### - Issue Severity: Minor.
 #### - Issue Description : 
-  the issue is that the copy, paste, cut, move and changed fields are declared as public, which means they can be accessed and modified from anywhere in the code, breaking the encapsulation principle. SonarLint recommend to modify the declaration of the public fields to static final constant or non public and provide accessor methods to improve encapsulation and maintainability. During my attempt to solve the error and make it static final constant or non public as the sonar mintioned Other errors were occurring depending on it ..
-  To avoid this error I did the following in the photo and Once added JMenuItem all the variables declaration in the top of the file became unnecessary and no usages for them so I deleted "copy,paste,cut"
+  the issue is that the copy, paste, cut, move and changed fields are declared as public, which means they can be accessed and modified from anywhere in the code, breaking the encapsulation principle. SonarLint recommend to modify the declaration of the public fields to static final constant or non-public and provide accessor methods to improve encapsulation and maintainability. During my attempt to solve the error and make it static final constant or non-public as the sonar mentioned Other errors were occurring depending on it.
+  To avoid this error I did the following in the photo and Once added JMenuItem all the variables declaration in the top of the file became unnecessary and no usages for them, so I deleted "copy,paste,cut"
 
 ![image](https://user-images.githubusercontent.com/114527203/226036386-8f08c6a3-d328-4bb8-bef0-4e645bac9029.png)
 
-for "move" it was already no usages for it so i deleted it also
+for "move" it was already no usages for it, so I deleted it also
 for TP rename it to textPanel and then declared as protected because it used in the subclass
 for changed rename it to changeStatus then declared as private 
 and for "menu" it declared as private
@@ -63,7 +63,7 @@ and for "menu" it declared as private
 ### Issue Type : Code smell
 ### Issue Severity : Major
 ### Issue Description : 
-  The issue is that we have a nested try block in the editor file so i created a new method called readFile() "as the follwing photo" which takes a File object as input and returns the contents of the file as a String so the code bacame more modular and easier to understand. and this improve the quality of the code by making it more modular, readable, and maintainable.
+  The issue is that we have a nested try block in the editor file, so I created a new method called readFile() "as the following photo" which takes a File object as input and returns the contents of the file as a String so the code became more modular and easier to understand. and this improves the quality of the code by making it more modular, readable, and maintainable.
 
 ![image](https://user-images.githubusercontent.com/114527203/226037375-75f07af6-9b59-4857-8906-4734449a40da.png)
 
@@ -129,12 +129,12 @@ In the else block, we handle the case where the writer is empty by displaying an
 #### - Issue Type : code smell
 #### - Issue Severity : Minor
 #### - Issue Description : 
-The CTRL_MASK constants was deprecated in Java 9 and this reduced maintainability. so i found that it replaced with the InputEvent.CTRL_DOWN_MASK constants
+The CTRL_MASK constants was deprecated in Java 9 and this reduced maintainability. so I found that it replaced with the InputEvent.CTRL_DOWN_MASK constants
 ### 9.2 Remove this use for "SHIFT_MASK"; it is deprecated
 #### - Issue Type : code smell
 #### - Issue Severity : Minor
 #### - Issue Description : 
-The SHIFT_MASK constants was deprecated in Java 9 and this reduced maintainability. so i found that it replaced with the InputEvent.SHIFT_DOWN_MASK constants
+The SHIFT_MASK constants was deprecated in Java 9 and this reduced maintainability. so I found that it replaced with the InputEvent.SHIFT_DOWN_MASK constants
 
 ![image](https://user-images.githubusercontent.com/114527203/225839870-6938c519-bbaf-4ec8-914e-623d5ccff5f3.png)
 
@@ -142,31 +142,31 @@ The SHIFT_MASK constants was deprecated in Java 9 and this reduced maintainabili
 #### - Issue Type : Bug
 #### - Issue Severity : Blocker
 #### - Issue Description : 
-Leaving file open for an extended period it can lead to various issues like Resource leaks, Performance degradation , Data corruption etc or unexpected behavior that can be difficult to diagnose and fix.
-i solve this issue by using the try-with-resources statement  then it is automatically closed when the try block is exited so the try-with-resources statement is  simplifies the code and eliminates the need for the finally block as following : 
+Leaving file open for an extended period it can lead to various issues like Resource leaks, Performance degradation , Data corruption etc. or unexpected behavior that can be difficult to diagnose and fix.
+I solve this issue by using the try-with-resources statement  then it is automatically closed when the try block is exited so the try-with-resources statement is  simplifies the code and eliminates the need for the final block as following : 
 
 ![image](https://user-images.githubusercontent.com/114527203/225845072-eab93c5e-1094-4431-a495-058aa2eb181a.png)
 
- cause of try-with-resources statement it is automatically closed  no needed for writer.close() so i deleted it to became as following : 
+ cause of try-with-resources statement it is automatically closed  no needed for writer.close() so I deleted it to became as following : 
 
 ![image](https://user-images.githubusercontent.com/114527203/225845358-d6e64401-e5fb-40ad-a894-5d528417a32c.png)
 
-### 11. Declare "close" on seperate line 
+### 11. Declare "close" on separate line 
 #### - Issue Type : Code Smell
 #### - Issue Severity : Minor
 #### - Issue Description : 
-Declaring multiple variables on one line is difficult to read.so i  Declare "close" on seperate line .
+Declaring multiple variables on one line is difficult to read. So I  Declare "close" on separate line .
 
 ### 12.Rename this method name (BuildMenu) to match regular expression " [a-z][a-zA-Z0-9]*$ ".
 #### Issue Type : code smell
 #### Issue Severity : Minor
-i renamed it to buildMenu. 
+I renamed it to buildMenu. 
 Failing to follow naming conventions can make the code more difficult to read and understand, which can negatively affect the software quality. If the code uses inconsistent or non-standard naming conventions, it can make it more difficult for other developers to understand how the code works and can introduce errors and bugs that are difficult to diagnose and resolve.
 
 ### 13. Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
 #### Issue Type : Code Smell 
 #### Issue Severity : Critical 
-i fixed it by using WindowConstants.EXIT_ON_CLOSE insted of JFrame.EXIT_ON_CLOSE.
+I fixed it by using WindowConstants.EXIT_ON_CLOSE instead of JFrame.EXIT_ON_CLOSE.
 if multiple instances of a class that use "EXIT_ON_CLOSE" are created, each instance will create a new object for the constant, leading to unnecessary object creation overhead and potentially affecting the performance of the application.
 ### 14. 
 ```agsl
@@ -250,14 +250,14 @@ which worked on fixing it.
 ### 16.2 This blocked of commented-out lines of code should be removed (System.out.println(e.getKeyCode());).
 #### Issue Type : Code Smell 
 #### Issue Severity : Major
-i just removed the comments.
+I just removed the comments.
 Commented-out code can make the program harder to read and understand. This can lead to confusion and errors,and can make maintenance more difficult because it can be unclear what code is actually being used and what code is not.
 
 ### 17.1 Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation(keyTyped).
 ### 17.2 Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation(keyReleased).
 #### Issue Type : Code Smell 
 #### Issue Severity : Critical
-i fixed it by use throw new UnsupportedOperationException(""); i tride to use KeyAdapter insted of KeyListener but i cant extend mor than one class so this way didn't work.
+I fixed it by use throw new UnsupportedOperationException(""); I tried to use KeyAdapter instead of KeyListener but I cant extend mor than one class so this way didn't work.
 Leaving an empty method may make maintenance more difficult because it can be unclear what the method is supposed to do. This can lead to unnecessary changes or bugs.
 
 ### 18 (14,8) "parent" is the name of a field in "Component"**
