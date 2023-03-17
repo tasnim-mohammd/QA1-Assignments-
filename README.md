@@ -294,8 +294,8 @@ to avoid the error in the code then it became :
 These are all false positive issues reported by SonarLint but are actually not code problems.
 It is possible that SONAR saw them as problems due to the complexity of the code or the limitations of the analysis tool.
 * (127, 3) This block of commented-out lines of code should be removed.
-*  (129, 13) Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed. 
-*  (108, 2) This block of commented-out lines of code should be removed.
+* (129, 13) Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed. 
+* (108, 2) This block of commented-out lines of code should be removed.
 * (245, 24) Replace this use of System.out or System.err by a logger.
 * (148, 16) Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed. 
 * (127, 2) This block of commented-out lines of code should be removed.
@@ -307,7 +307,6 @@ It is possible that SONAR saw them as problems due to the complexity of the code
 ----------------------------
 ### False Negative Issues
 This is the issue we find but didn't reported by SonarLint:
-find function in FindDialog file.
-
-The find() method does not handle the case where the search string is empty. So I added a check to see if the pattern string is empty.
+*find function in FindDialog file.
+the find() method does not handle the case where the search string is empty. So I added a check to see if the pattern string is empty.
 If it is empty, we return an error message with JOptionPane. showMessageDialog(), and immediately return from the method to avoid any further execution.
