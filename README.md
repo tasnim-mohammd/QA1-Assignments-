@@ -1,4 +1,4 @@
-# Static analyzer
+**# Static analyzer
 
 ### 1. (127, 3) This block of commented-out lines of code should be removed.
    This was my first sonarlint job malfunction,
@@ -200,10 +200,18 @@ By doing all this, the EditorFileException class now compiles without any errors
 This was the set of warnings shown in the file editor,
 which worked on fixing it.
 
-### 14.1 This blocked of commented-out lines of code should be remoed (closeDialog();).
+![](img_1.png)
+![](img_2.png)
+![](img_3.png)
+![](img_4.png)
+
+This was the set of warnings shown in the files Editor Exception, Editor File Exception, EditorAsSaveException and EditorSaveException
+which worked on fixing it.
+
+### 14.1 This blocked of commented-out lines of code should be removed (closeDialog();).
 #### Issue Type : Code Smell 
 #### Issue Severity : Major
-### 14.2 This blocked of commented-out lines of code should be remoed (System.out.println(e.getKeyCode());).
+### 14.2 This blocked of commented-out lines of code should be removed (System.out.println(e.getKeyCode());).
 #### Issue Type : Code Smell 
 #### Issue Severity : Major
 
@@ -213,3 +221,15 @@ which worked on fixing it.
 ### 15.2 Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation(keyReleased).
 #### Issue Type : Code Smell 
 #### Issue Severity : Critical
+
+![](img_5.png)
+### 16 (14,8) "parent" is the name of a field in "Component"**
+#### Issue Type : Code Smell
+#### Issue Severity : Blocker
+* The issue is caused by the parent field in the FindDialog class, which conflicts with the parent field defined in the java.awt.Component class.
+  To fix this, you can either rename the parent field in the FindDialog class to something else, such as editor.
+
+### 17. (21, 9) Make "matcher" transient or serializable.
+#### Issue Type : Code Smell
+#### Issue Severity : Critical
+* It is recommended that you make the Match field either transient or serializable. To fix this, I worked on adding the "transient" keyword before the "matching" type declaration.
