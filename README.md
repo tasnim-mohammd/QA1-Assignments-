@@ -125,3 +125,9 @@ The CTRL_MASK constants was deprecated in Java 9 and this reduced maintainabilit
 #### - Issue Description : 
 The SHIFT_MASK constants was deprecated in Java 9 and this reduced maintainability. so i found that it replaced with the InputEvent.SHIFT_DOWN_MASK constants
 ![image](https://user-images.githubusercontent.com/114527203/225839870-6938c519-bbaf-4ec8-914e-623d5ccff5f3.png)
+### 11.Use try-with-resources or close this "FileWriter" in a "finally" clause. 
+#### - Issue Type : Bug
+#### - Issue Severity : Blocker
+#### - Issue Description : 
+Leaving file open for an extended period can lead to conflicts with other parts of the application . This can cause errors or unexpected behavior that can be difficult to diagnose and fix.and it impact the performance and stability .  so i closed it with "finally " as following : 
+![image](https://user-images.githubusercontent.com/114527203/225842495-f1d5b1da-aacf-4dd5-b896-1123f876406e.png)
