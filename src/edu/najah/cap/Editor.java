@@ -12,22 +12,21 @@ import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.logging.Logger;
 
-@SuppressWarnings("serial")
+
 public class Editor extends JFrame implements ActionListener, DocumentListener {
 
 	private static final Logger logger = Logger.getLogger(Editor.class.getName());
 
 	protected JEditorPane textPanel;
-	private JMenuBar menu;
+	private final JMenuBar menu;
 	private boolean changeStatus = false;
 
 
 
-	protected File file;
+	private File file;
 
-	private String[] actions = {"Open","Save","New","Edit","Quit", "Save as..."};
+	private final String[] actions = {"Open","Save","New","Edit","Quit", "Save as..."};
 
-	protected JMenu jmfile;
 
 	public Editor() {
 
@@ -52,31 +51,32 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	}
 
 	private void buildFileMenu() {
+      JMenu jFileMenu;
 
-		jmfile = new JMenu("File");
-		jmfile.setMnemonic('F');
-		menu.add(jmfile);
+		jFileMenu = new JMenu("File");
+		jFileMenu.setMnemonic('F');
+		menu.add(jFileMenu);
 		JMenuItem n = new JMenuItem(actions[2]);
 		n.setMnemonic('N');
 		n.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
 		n.addActionListener(this);
-		jmfile.add(n);
+		jFileMenu.add(n);
 		JMenuItem open = new JMenuItem(actions[0]);
-		jmfile.add(open);
+		jFileMenu.add(open);
 		open.addActionListener(this);
 		open.setMnemonic('O');
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
 		JMenuItem save = new JMenuItem(actions[1]);
-		jmfile.add(save);
+		jFileMenu.add(save);
 		save.setMnemonic('S');
 		save.addActionListener(this);
 		save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
-		JMenuItem saveas = new JMenuItem(actions[5]);
-		saveas.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
-		jmfile.add(saveas);
-		saveas.addActionListener(this);
+		JMenuItem saveAs = new JMenuItem(actions[5]);
+		saveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
+		jFileMenu.add(saveAs);
+		saveAs.addActionListener(this);
 		JMenuItem quit = new JMenuItem(actions[4]);
-		jmfile.add(quit);
+		jFileMenu.add(quit);
 		quit.addActionListener(this);
 		quit.setMnemonic('Q');
 		quit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));
@@ -108,49 +108,27 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		find.addActionListener(this);
 		edit.add(find);
 		find.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK));
-		JMenuItem sall = new JMenuItem("Select All");
-		sall.setMnemonic('A');
-		sall.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
-		sall.addActionListener(this);
-		edit.add(sall);
+		JMenuItem selectAll = new JMenuItem("Select All");
+		selectAll.setMnemonic('A');
+		selectAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
+		selectAll.addActionListener(this);
+		edit.add(selectAll);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
 		switch (action) {
-			case "Exit":
-				handleExitAction();
-				break;
-			case "Load":
-				handleLoadFileAction();
-				break;
-			case "Save":
-				handleSaveFileAction();
-				break;
-			case "New":
-				handleNewFileAction();
-				break;
-			case "Save As":
-				handleSaveAsAction();
-				break;
-			case "Select All":
-				handleSelectAllAction();
-				break;
-			case "Copy":
-				handleCopyAction();
-				break;
-			case "Cut":
-				handleCutAction();
-				break;
-			case "Paste":
-				handlePasteAction();
-				break;
-			case "Find":
-				handleFindAction();
-				break;
-			default:
-            logger.info("The entered action is not in the list");
-		
+			case "Exit" -> handleExitAction();
+			case "Load" -> handleLoadFileAction();
+			case "Save" -> handleSaveFileAction();
+			case "New" -> handleNewFileAction();
+			case "Save As" -> handleSaveAsAction();
+			case "Select All" -> handleSelectAllAction();
+			case "Copy" -> handleCopyAction();
+			case "Cut" -> handleCutAction();
+			case "Paste" -> handlePasteAction();
+			case "Find" -> handleFindAction();
+			default -> logger.info("The entered action is not in the list");
 		}
 	}
 
@@ -165,7 +143,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	private void handleSaveFileAction() {
 		int ans = 0;
 		if (changeStatus) {
-			ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file", 0, 2);
+			ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		}
 		if (ans != 1) {
 			if (file == null) {
@@ -233,7 +211,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 		}
 		String text = textPanel.getText();
 		logger.info(text);
-		try (PrintWriter writer = new PrintWriter(file);) {
+		try (PrintWriter writer = new PrintWriter(file)) {
 			if (!file.canWrite())
 				throw new EditorSaveException("Cannot write file!");
 			writer.write(text);
@@ -254,7 +232,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			}
 
 			if (changeStatus) {
-				int ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file", 0, 2);
+				int ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (ans == 1) {
 					return;
 				}
@@ -263,24 +241,22 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 
 			file = dialog.getSelectedFile();
 
-			StringBuilder rs = new StringBuilder(readFile(file));
-
-			textPanel.setText(rs.toString());
+			textPanel.setText(readFile(file));
 			changeStatus = false;
 			setTitle("Editor - " + file.getName());
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e, "Error", 0);
+			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	private String readFile(File file) throws IOException {
 		StringBuilder rs = new StringBuilder();
 		try (FileReader fr = new FileReader(file);
-			 BufferedReader reader = new BufferedReader(fr);) {
+			 BufferedReader reader = new BufferedReader(fr)) {
 			String line;
 			while ((line = reader.readLine()) != null) {
-				rs.append(line + "\n");
+				rs.append(line).append("\n");
 			}
 		}
 		return rs.toString();

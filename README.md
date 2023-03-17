@@ -194,3 +194,10 @@ So I've removed NoSuchFileException from the list of parent classes and extended
 Next, I added a serialVersionUID field to EditorFileException to avoid any potential issues with serialization, because Exception implements Serializable.
 Finally, I kept the same constructors you had in EditorFileException because they are already correct and don't need any modification.
 By doing all this, the EditorFileException class now compiles without any errors about having too many parent classes.
+
+![](img.png)
+
+This was the set of warnings shown in the file editor,
+which worked on fixing it.
+
+
