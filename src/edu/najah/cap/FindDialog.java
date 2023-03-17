@@ -16,7 +16,8 @@ public class FindDialog extends JDialog implements ActionListener, KeyListener {
 	JLabel label;
 	JTextField textField;
 	JCheckBox caseSensitive;
-	JButton find, close;
+	JButton find;
+	JButton close;
 	boolean finishedFinding = true;
 	Matcher matcher;
 
