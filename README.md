@@ -67,11 +67,11 @@ finally for "menu" it declared as private
 
 
 ### 7. Add a default case to this switch.
-### Issue Type : Code Smell 
-### Issue Severity : Critical 
+#### Issue Type : Code Smell 
+#### Issue Severity : Critical 
 ### 8. A "NullPointerException" could be thrown: "writer" is nullable here.
-### Issue Type : Bug
-### Issue Severity : Major
+#### Issue Type : Bug
+#### Issue Severity : Major
 ### 8.1
 ```agsl
 private void handleSaveFileAction() {
@@ -106,11 +106,21 @@ To fix this, you can modify the saveAs method to handle the case where the write
 In the modified method, if the writer is not null, it will try to write to the file as before. However, we've added a try-catch-final block to catch any IO exceptions that might occur while writing to the file, and to close the writer regardless of whether the write was successful or not.
 In the else block, we handle the case where the writer is empty by displaying an error message to the user. You can customize this error message to suit your needs.
 ### 9.Rename this method name (BuildMenu) to match regular expression '[a-z][a-zA-Z0-9]*$'.
-### Issue Type : code smell
-### Issue Severity : Minor
+#### Issue Type : code smell
+#### Issue Severity : Minor
 ### 11. Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
-### Issue Type : Code Smell 
-### Issue Severity : Critical 
+#### Issue Type : Code Smell 
+#### Issue Severity : Critical 
 
-### 10.
-
+### 10. Remove deprecated constant :
+### 10.1 Remove this use for "CTRL_MASK"; it is deprecated
+#### - Issue Type : code smell
+#### - Issue Severity : Minor
+#### - Issue Description : 
+The CTRL_MASK constants was deprecated in Java 9 and this reduced maintainability. so i found that it replaced with the InputEvent.CTRL_DOWN_MASK constants
+### 10.2 Remove this use for "SHIFT_MASK"; it is deprecated
+#### - Issue Type : code smell
+#### - Issue Severity : Minor
+#### - Issue Description : 
+The SHIFT_MASK constants was deprecated in Java 9 and this reduced maintainability. so i found that it replaced with the InputEvent.SHIFT_DOWN_MASK constants
+![image](https://user-images.githubusercontent.com/114527203/225839870-6938c519-bbaf-4ec8-914e-623d5ccff5f3.png)
