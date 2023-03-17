@@ -145,3 +145,11 @@ i solve this issue by using the try-with-resources statement  then it is automat
  
 ![image](https://user-images.githubusercontent.com/114527203/225845358-d6e64401-e5fb-40ad-a894-5d528417a32c.png)
 
+
+## Issues in the FindDialog File : 
+
+### 12. Declare "close" on seperate line 
+#### - Issue Type : Code Smell
+#### - Issue Severity : Minor
+#### - Issue Description : 
+Declaring multiple variables on one line is difficult to read.so i  Declare "close" on seperate line .
