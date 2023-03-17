@@ -211,7 +211,7 @@ which worked on fixing it.
 ![](img_2.png)
 ![](img_3.png)
 ![](img_4.png)
-
+![](img_5.png)
 This was the set of warnings shown in the files Editor Exception, Editor File Exception, EditorAsSaveException and EditorSaveException
 which worked on fixing it.
 
@@ -228,7 +228,7 @@ Commented-out code can make the program harder to read and understand. This can 
 #### Issue Severity : Critical
 i fixed it by use throw new UnsupportedOperationException(""); i tride to use KeyAdapter insted of KeyListener but i cant extend mor than one class so this way didn't work.
 Leaving an empty method may make maintenance more difficult because it can be unclear what the method is supposed to do. This can lead to unnecessary changes or bugs.
-![](img_5.png)
+
 ### 16 (14,8) "parent" is the name of a field in "Component"**
 #### Issue Type : Code Smell
 #### Issue Severity : Blocker
