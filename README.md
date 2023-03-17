@@ -200,4 +200,16 @@ By doing all this, the EditorFileException class now compiles without any errors
 This was the set of warnings shown in the file editor,
 which worked on fixing it.
 
+### 14.1 This blocked of commented-out lines of code should be remoed (closeDialog();).
+### Issue Type : Code Smell 
+### Issue Severity : Major
+### 14.2 This blocked of commented-out lines of code should be remoed (System.out.println(e.getKeyCode());).
+### Issue Type : Code Smell 
+### Issue Severity : Major
 
+### 15.1 Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation(keyTyped).
+### Issue Type : Code Smell 
+### Issue Severity : Critical
+### 15.2 Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation(keyReleased).
+### Issue Type : Code Smell 
+### Issue Severity : Critical
