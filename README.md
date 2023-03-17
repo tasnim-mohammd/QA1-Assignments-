@@ -73,6 +73,9 @@ and this improves the quality of the code by improving readability, consistency,
 ### 8. Add a default case to this switch.
 #### Issue Type : Code Smell 
 #### Issue Severity : Critical 
+I added a default case to a switch loop
+The lack of a default case can prevent the code from handling unexpected inputs.
+Adding a default case to the switch statement can help to ensure that the code behaves as expected even when unexpected input values are provided. The default case can handle situations where none of the other cases match the input value, providing a fallback option that can prevent unexpected behavior or errors.
 ### 9. A "NullPointerException" could be thrown: "writer" is nullable here.
 #### Issue Type : Bug
 #### Issue Severity : Major
@@ -126,10 +129,14 @@ In the else block, we handle the case where the writer is empty by displaying an
 ### 10.Rename this method name (BuildMenu) to match regular expression " [a-z][a-zA-Z0-9]*$ ".
 #### Issue Type : code smell
 #### Issue Severity : Minor
+i renamed it to buildMenu. 
+Failing to follow naming conventions can make the code more difficult to read and understand, which can negatively affect the software quality. If the code uses inconsistent or non-standard naming conventions, it can make it more difficult for other developers to understand how the code works and can introduce errors and bugs that are difficult to diagnose and resolve.
+
 ### 11. Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
 #### Issue Type : Code Smell 
 #### Issue Severity : Critical 
-
+i fixed it by using WindowConstants.EXIT_ON_CLOSE insted of JFrame.EXIT_ON_CLOSE.
+if multiple instances of a class that use "EXIT_ON_CLOSE" are created, each instance will create a new object for the constant, leading to unnecessary object creation overhead and potentially affecting the performance of the application.
 ### 12. 
 ```agsl
 super("Editor"); 
@@ -209,19 +216,18 @@ This was the set of warnings shown in the files Editor Exception, Editor File Ex
 which worked on fixing it.
 
 ### 14.1 This blocked of commented-out lines of code should be removed (closeDialog();).
-#### Issue Type : Code Smell 
-#### Issue Severity : Major
 ### 14.2 This blocked of commented-out lines of code should be removed (System.out.println(e.getKeyCode());).
 #### Issue Type : Code Smell 
 #### Issue Severity : Major
+i just removed the comments.
+Commented-out code can make the program harder to read and understand. This can lead to confusion and errors,and can make maintenance more difficult because it can be unclear what code is actually being used and what code is not.
 
 ### 15.1 Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation(keyTyped).
-#### Issue Type : Code Smell 
-#### Issue Severity : Critical
 ### 15.2 Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation(keyReleased).
 #### Issue Type : Code Smell 
 #### Issue Severity : Critical
-
+i fixed it by use throw new UnsupportedOperationException(""); i tride to use KeyAdapter insted of KeyListener but i cant extend mor than one class so this way didn't work.
+Leaving an empty method may make maintenance more difficult because it can be unclear what the method is supposed to do. This can lead to unnecessary changes or bugs.
 ![](img_5.png)
 ### 16 (14,8) "parent" is the name of a field in "Component"**
 #### Issue Type : Code Smell
