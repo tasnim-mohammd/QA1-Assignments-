@@ -303,3 +303,11 @@ It is possible that SONAR saw them as problems due to the complexity of the code
 * (46, 34) Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
 
 #### * ->In the Find Dialog file and the rest of the files, we did not notice any false positive problems
+
+----------------------------
+### False Negative Issues
+This is the issue we find but didn't reported by SonarLint:
+find function in FindDialog file.
+
+The find() method does not handle the case where the search string is empty. So I added a check to see if the pattern string is empty.
+If it is empty, we return an error message with JOptionPane. showMessageDialog(), and immediately return from the method to avoid any further execution.
