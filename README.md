@@ -287,6 +287,8 @@ to avoid the error in the code then it became :
 ![image](https://user-images.githubusercontent.com/114527203/226059387-25d41876-3a06-45d9-9455-b05d420ebf52.png)
 
 
+## and now the Sonarlint has zero issues mentioned
+
 ----------------------------
 ### False Positive Issues
 These are all false positive issues reported by SonarLint but are actually not code problems.
