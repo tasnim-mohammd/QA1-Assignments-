@@ -141,11 +141,11 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	}
 
 	private void handleSaveFileAction() {
-		int ans = 0;
+	 	int answare = 0;
 		if (changeStatus) {
-			ans = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			answare = JOptionPane.showConfirmDialog(null, "The file has changed. You want to save it?", "Save file", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		}
-		if (ans != 1) {
+		if (answare != 1) {
 			if (file == null) {
 				saveAs(actions[1]);
 			} else {

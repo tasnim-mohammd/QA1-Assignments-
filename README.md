@@ -200,4 +200,10 @@ By doing all this, the EditorFileException class now compiles without any errors
 This was the set of warnings shown in the file editor,
 which worked on fixing it.
 
+![](img_1.png)
+![](img_2.png)
+![](img_3.png)
+![](img_4.png)
 
+This was the set of warnings shown in the files EditorException, EditorFileException, EditorSaveAsException  and EditorSaveException
+which worked on fixing it.

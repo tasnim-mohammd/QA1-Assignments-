@@ -8,29 +8,22 @@ import java.util.Objects;
 public class EditorFileException extends IOException {
 
     public static final long serialVersionUID = 1L;
-    private final int errorCode;
 
-    public EditorFileException(String message, int errorCode) {
+    public EditorFileException(String message) {
         super(message);
-        this.errorCode = errorCode;
     }
 
-    public EditorFileException(String message, Throwable cause, int errorCode) {
+    public EditorFileException(String message, Throwable cause) {
         super(message, cause);
-        this.errorCode = errorCode;
-    }
-
-    public int getErrorCode() {
-        return errorCode;
     }
 
     public static EditorFileException fileAlreadyExistsException(String message) {
         Objects.requireNonNull(message, "message must not be null");
-        return new EditorFileException(message, new FileAlreadyExistsException(message), 409);
+        return new EditorFileException(message, new FileAlreadyExistsException(message));
     }
 
     public static EditorFileException noSuchFileException(String message) {
         Objects.requireNonNull(message, "message must not be null");
-        return new EditorFileException(message, new NoSuchFileException(message), 404);
+        return new EditorFileException(message, new NoSuchFileException(message));
     }
 }
