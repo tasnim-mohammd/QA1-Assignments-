@@ -131,7 +131,11 @@ The SHIFT_MASK constants was deprecated in Java 9 and this reduced maintainabili
 #### - Issue Description : 
 Leaving file open for an extended period it can lead to various issues like Resource leaks, Performance degradation , Data corruption etc or unexpected behavior that can be difficult to diagnose and fix.
 i solve this issue by using the try-with-resources statement  then it is automatically closed when the try block is exited so the try-with-resources statement is  simplifies the code and eliminates the need for the finally block as following : 
+
 ![image](https://user-images.githubusercontent.com/114527203/225845072-eab93c5e-1094-4431-a495-058aa2eb181a.png)
- cause of try-with-resources statement  then it is automatically closed  no needed for writer.close() so i deleted it to became as following : 
+
+
+ cause of try-with-resources statement it is automatically closed  no needed for writer.close() so i deleted it to became as following : 
+ 
 ![image](https://user-images.githubusercontent.com/114527203/225845358-d6e64401-e5fb-40ad-a894-5d528417a32c.png)
 
