@@ -49,33 +49,30 @@ Use a switch statement instead of multiple if-else statements to handle differen
 #### - Issue Severity: Minor.
 #### - Issue Description : 
    the issue is that the copy, paste, cut, move and changed  fields are declared as public, which means they can be accessed and modified from anywhere in the code, breaking the encapsulation principle. SonarLint recommend to modify the declaration of the public fields to static final constant or non public and provide accessor methods to improve encapsulation and maintainability.
-to avoid this issue ![image](https://user-images.githubusercontent.com/114527203/225830629-7e5b6999-83ba-4130-8392-2af1b8c45525.png)
-
+During my attempt to solve the error and make it static final constant or non public as the sonar mintioned Other errors were occurring depending on it .. so the optimal one was : 
+To avoid this error I did the following
+![image](https://user-images.githubusercontent.com/114527203/225830629-7e5b6999-83ba-4130-8392-2af1b8c45525.png)
+Once added JMenuItem all the variables declaration in the top of the file  became unnecessary and no usages for them so I deleted "copy,paste,cut" 
+for "move" it was already no usages for it so i deleted it also
+for TP rename it to textPanel and then declared as protected because it used in the subclass
+for changed rename it to changeStatus then declared as private 
+finally for "menu" it declared as private 
 ### 6.extract the nested try block into seperate method 
 ### Issue Type : Code smell
 ### Issye Severity : Major
 ### Issue Description : 
-   The issue is that we have a nested try block in the editor file so i created a new method called readFile() which takes a File object as input and returns the contents of the file as a String so the code bacame more modular and easier to understand.
+   The issue is that we have a nested try block in the editor file so i created a new method called readFile() "as the follwing photo"  which takes a File object as input and returns the contents of the file as a String so the code bacame more modular and easier to understand.
    and this improve the quality of the code by making it more modular, readable, and maintainable.
+![image](https://user-images.githubusercontent.com/114527203/225834110-2c7fa1ef-f8c4-41b4-8993-6437644b7689.png)
 
-### 7. Define constant instead of duplicating 
-### 7.1 Define constant instead of duplicating copy 
-### 7.2 Define constant instead of duplicating paste
-### 7.3 Define constant instead of duplicating cut
-### 7.4 Define constant instead of duplicating tp
-### 7.5 Define constant instead of duplicating menu
+
+### 7. Add a default case to this switch.
 ### Issue Type : Code Smell 
 ### Issue Severity : Critical 
-### Issue Description : 
-The issue is that we have to use the constant  " PASTE_ITEM", " COPY_ITEM " , " CUT_ITEM " , "MENU" , "TP "  wherever we need to use the  string  in the editor file .
-and this improve the quality of the code by improving readability, consistency, scalability, and maintainability.
-### 8. Add a default case to this switch.
-### Issue Type : Code Smell 
-### Issue Severity : Critical 
-### 9. A "NullPointerException" could be thrown: "writer" is nullable here.
+### 8. A "NullPointerException" could be thrown: "writer" is nullable here.
 ### Issue Type : Bug
 ### Issue Severity : Major
-### 9.1
+### 8.1
 ```agsl
 private void handleSaveFileAction() {
 		int ans = 0;
@@ -108,12 +105,12 @@ private void handleSaveFileAction() {
 To fix this, you can modify the saveAs method to handle the case where the writer is null. One way to do this is to add an if statement to check if the writer is null, and if so, return from the method without writing anything to the file.
 In the modified method, if the writer is not null, it will try to write to the file as before. However, we've added a try-catch-final block to catch any IO exceptions that might occur while writing to the file, and to close the writer regardless of whether the write was successful or not.
 In the else block, we handle the case where the writer is empty by displaying an error message to the user. You can customize this error message to suit your needs.
-### 10.Rename this method name (BuildMenu) to match regular expression '[a-z][a-zA-Z0-9]*$'.
+### 9.Rename this method name (BuildMenu) to match regular expression '[a-z][a-zA-Z0-9]*$'.
 ### Issue Type : code smell
 ### Issue Severity : Minor
 ### 11. Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
 ### Issue Type : Code Smell 
 ### Issue Severity : Critical 
 
-### 12.
+### 10.
 
