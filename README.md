@@ -270,6 +270,23 @@ Leaving an empty method may make maintenance more difficult because it can be un
 #### Issue Type : Code Smell
 #### Issue Severity : Critical
 * It is recommended that you make the Match field either transient or serializable. To fix this, I worked on adding the "transient" keyword before the "matching" type declaration.
+
+### 20.  remove the unused method parameter "errorCode " 
+#### Issue Type : Code Smell
+#### Issue Severity : Major
+### Issue Description :
+
+![image](https://user-images.githubusercontent.com/114527203/226059005-2f8467a6-9a7b-46d0-84da-f723789a9ff7.png)
+
+the solution was that ii removed the errorCode then i removed this 
+
+![image](https://user-images.githubusercontent.com/114527203/226059338-e2fb7967-fabc-47f0-81bb-0faf26402a8e.png)
+
+to avoid the error in the code then it became :  
+
+![image](https://user-images.githubusercontent.com/114527203/226059387-25d41876-3a06-45d9-9455-b05d420ebf52.png)
+
+
 ----------------------------
 ### False Positive Issues
 These are all false positive issues reported by SonarLint but are actually not code problems.
