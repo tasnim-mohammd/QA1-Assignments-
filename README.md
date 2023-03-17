@@ -239,3 +239,17 @@ Leaving an empty method may make maintenance more difficult because it can be un
 #### Issue Type : Code Smell
 #### Issue Severity : Critical
 * It is recommended that you make the Match field either transient or serializable. To fix this, I worked on adding the "transient" keyword before the "matching" type declaration.
+----------------------------
+### False Positive Issues
+These are all false positive issues reported by SonarLint but are actually not code problems.
+It is possible that SONAR saw them as problems due to the complexity of the code or the limitations of the analysis tool.
+* (127, 3) This block of commented-out lines of code should be removed.
+*  (129, 13) Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed. 
+*  (108, 2) This block of commented-out lines of code should be removed.
+* (245, 24) Replace this use of System.out or System.err by a logger.
+* (148, 16) Refactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed. 
+* (127, 2) This block of commented-out lines of code should be removed.
+* (65, 40) Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
+* (46, 34) Use static access with "javax.swing.WindowConstants" for "EXIT_ON_CLOSE".
+
+#### * ->In the Find Dialog file and the rest of the files, we did not notice any false positive problems
