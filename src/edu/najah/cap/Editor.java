@@ -17,8 +17,8 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 
 	private static final Logger logger = Logger.getLogger(Editor.class.getName());
 
-	public JEditorPane textPanel;//Text Panel
-	public JMenuBar menu;//Menu
+	protected JEditorPane textPanel;
+	public  JMenuBar menu;
 	private boolean changeStatus = false;
 
 
@@ -32,12 +32,12 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 	public Editor() {
 		//Editor the name of our application
 		super("Editor");
-		textPanel = new JEditorPane();
+		 textPanel = new JEditorPane();
 		// center means middle of container.
 		add(new JScrollPane(textPanel), "Center");
 		textPanel.getDocument().addDocumentListener(this);
 
-		menu = new JMenuBar();
+		JMenuBar	menu = new JMenuBar();
 		setJMenuBar(menu);
 		buildMenu();
 		//The size of window
@@ -175,7 +175,7 @@ public class Editor extends JFrame implements ActionListener, DocumentListener {
 			if (file == null) {
 				saveAs(actions[1]);
 			} else {
-				String text = textPanel.getText();
+				String text =textPanel.getText();
 				try {
 					FileWriter writer = new FileWriter(file);
 					if (!file.canWrite()) {
