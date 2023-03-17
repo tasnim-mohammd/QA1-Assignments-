@@ -1,5 +1,7 @@
 # Static analyzer
 
+## Issyues in the Editor file : 
+
 ### 1. (127, 3) This block of commented-out lines of code should be removed.
    This was my first sonarlint job malfunction,
 
